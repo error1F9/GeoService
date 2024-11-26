@@ -1,0 +1,59 @@
+basePath: /
+definitions:
+  main.Address:
+    properties:
+      value:
+        type: string
+    type: object
+  main.GeocodeResponse:
+    properties:
+      suggestions:
+        items:
+          $ref: '#/definitions/main.Address'
+        type: array
+    type: object
+  main.SearchResponse:
+    properties:
+      addresses:
+        items:
+          $ref: '#/definitions/main.Address'
+        type: array
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a sample server Petstore server.
+  termsOfService: http://swagger.io/terms/
+  title: Todo App API
+  version: "1.0"
+paths:
+  /api/address/geocode:
+    post:
+      consumes:
+      - application/json
+      description: Handle Address by GeoCode
+      operationId: geo
+      parameters:
+      - description: Handle Address by GeoCode
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/main.GeocodeResponse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.SearchResponse'
+        "400":
+          description: Bad Request
+          schema: {}
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: receive Address by GeoCode
+      tags:
+      - GeoCode
+swagger: "2.0"

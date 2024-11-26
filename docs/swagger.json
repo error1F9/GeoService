@@ -1,0 +1,89 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample server Petstore server.",
+        "title": "Todo App API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/api/address/geocode": {
+            "post": {
+                "description": "Handle Address by GeoCode",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "GeoCode"
+                ],
+                "summary": "receive Address by GeoCode",
+                "operationId": "geo",
+                "parameters": [
+                    {
+                        "description": "Handle Address by GeoCode",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.GeocodeResponse"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.SearchResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {}
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {}
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.Address": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.GeocodeResponse": {
+            "type": "object",
+            "properties": {
+                "suggestions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.Address"
+                    }
+                }
+            }
+        },
+        "main.SearchResponse": {
+            "type": "object",
+            "properties": {
+                "addresses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.Address"
+                    }
+                }
+            }
+        }
+    }
+}
